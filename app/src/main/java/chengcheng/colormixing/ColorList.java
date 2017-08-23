@@ -3,24 +3,38 @@ package chengcheng.colormixing;
 import android.graphics.Color;
 import android.widget.TextView;
 
+import java.io.Serializable;
+
 /**
  * Created by chengchengwang on 8/16/17.
  */
 
-public class ColorList {
+ public class ColorList implements Serializable{
     public int alpha;
-    public int color;
+    public int red;
+    public  int green;
+    public  int blue;
 
-    public ColorList(int alpha, int color) {
+    public ColorList(int alpha, int red, int green, int blue) {
         this.alpha = alpha;
-        this.color = color;
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
     }
 
-    public int getAlpha() {
-        return alpha;
+    public void setAlpha(int alpha) {
+        this.alpha = alpha;
     }
 
-    public int getColor() {
-        return color;
+    public void setRed(int red) {
+        this.red = red;
+    }
+
+    public void setGreen(int green) {
+        this.green = green;
+    }
+
+    public void setBlue(int blue) {
+        this.blue = blue;
     }
 }

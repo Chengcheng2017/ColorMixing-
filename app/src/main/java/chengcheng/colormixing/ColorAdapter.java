@@ -46,8 +46,8 @@ public class ColorAdapter extends BaseAdapter{
         TextView colorSquare = (TextView) rowView.findViewById(R.id.color_square);
         //SeekBar colorAdjust = (SeekBar) rowView.findViewById(R.id.color_adjust);
 
-        ColorList colorList = (ColorList) getItem(position);
-        colorSquare.setBackgroundColor(colorList.color);
+        //ColorList colorList = (ColorList) getItem(position);
+        //colorSquare.setBackgroundColor(colorList.color);
 
         return rowView;
     }

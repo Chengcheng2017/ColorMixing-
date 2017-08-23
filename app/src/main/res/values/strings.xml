@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ColorMixing</string>
+    <string name="title_activity_add_color">AddColor</string>
 </resources>
