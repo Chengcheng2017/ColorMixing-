@@ -1,6 +1,7 @@
 package chengcheng.colormixing;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,10 +45,15 @@ public class ColorAdapter extends BaseAdapter{
         View rowView = mInflater.inflate(R.layout.color_list_item, parent, false);
 
         TextView colorSquare = (TextView) rowView.findViewById(R.id.color_square);
-        //SeekBar colorAdjust = (SeekBar) rowView.findViewById(R.id.color_adjust);
+        SeekBar colorAdjust = (SeekBar) rowView.findViewById(R.id.color_adjust);
 
-        //ColorList colorList = (ColorList) getItem(position);
-        //colorSquare.setBackgroundColor(colorList.color);
+        ColorList colorlist = mDataSource.get(position);
+        int alpha = colorlist.getAlpha();
+        int red = colorlist.getRed();
+        int green = colorlist.getGreen();
+        int blue = colorlist.getBlue();
+        colorSquare.setBackgroundColor(Color.argb(alpha,red, green, blue));
+        colorAdjust.setProgress(255);
 
         return rowView;
     }

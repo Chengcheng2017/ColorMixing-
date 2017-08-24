@@ -22,6 +22,22 @@ import java.io.Serializable;
         this.blue = blue;
     }
 
+    public int getAlpha() {
+        return alpha;
+    }
+
+    public int getRed() {
+        return red;
+    }
+
+    public int getGreen() {
+        return green;
+    }
+
+    public int getBlue() {
+        return blue;
+    }
+
     public void setAlpha(int alpha) {
         this.alpha = alpha;
     }

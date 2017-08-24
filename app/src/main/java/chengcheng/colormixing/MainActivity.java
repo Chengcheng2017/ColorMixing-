@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView colorDisplay;
     private Button addColor;
     private ListView colorList;
+    ColorAdapter adapter;
     final ArrayList<ColorList> colorLists = new ArrayList<ColorList>();
 
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         addColor = (Button) findViewById(R.id.add_color);
         colorList = (ListView) findViewById(R.id.color_list);
 
-        ColorAdapter adapter = new ColorAdapter(this, colorLists);
+        adapter = new ColorAdapter(this, colorLists);
         colorList.setAdapter(adapter);
 
         addColor.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RequestCode.ADD_COLOR && resultCode == RESULT_OK) {
+            ColorList color = (ColorList) data.getSerializableExtra("COLOR");
+            colorLists.add(color);
+            adapter.notifyDataSetChanged();
 
         }
     }
