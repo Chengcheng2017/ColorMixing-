@@ -1,9 +1,14 @@
 package chengcheng.colormixing;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,10 +19,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView colorDisplay;
+    private Button colorDisplay;
     private Button addColor;
     private ListView colorList;
-    ColorAdapter adapter;
+    private ColorAdapter adapter;
     final ArrayList<ColorList> colorLists = new ArrayList<ColorList>();
 
 
@@ -27,12 +32,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        colorDisplay = (TextView) findViewById(R.id.color_display);
+        colorDisplay = (Button) findViewById(R.id.color_display);
         addColor = (Button) findViewById(R.id.add_color);
         colorList = (ListView) findViewById(R.id.color_list);
 
         adapter = new ColorAdapter(this, colorLists);
         colorList.setAdapter(adapter);
+
 
         addColor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +56,28 @@ public class MainActivity extends AppCompatActivity {
             ColorList color = (ColorList) data.getSerializableExtra("COLOR");
             colorLists.add(color);
             adapter.notifyDataSetChanged();
+
+            int r = 0;
+            int g = 0;
+            int b = 0;
+            int size = adapter.getCount();
+
+            for (ColorList c: adapter.mDataSource){
+                r += c.getRed() * c.getAlpha();
+                g += c.getGreen() * c.getAlpha();
+                b += c.getBlue() * c.getAlpha();
+            }
+            if(size != 0) {
+                r = r / 255;
+                g = g / 255;
+                b = b / 255;
+            }
+
+            if (r > 255) r = 255;
+            if (g > 255) g = 255;
+            if (b > 255) b = 255;
+
+            colorDisplay.setBackgroundColor(Color.argb(255, r, g, b));
 
         }
     }

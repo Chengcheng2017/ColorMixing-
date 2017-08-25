@@ -1,13 +1,17 @@
 package chengcheng.colormixing;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,7 +22,7 @@ import java.util.ArrayList;
 public class ColorAdapter extends BaseAdapter{
     private Context mContext;
     private LayoutInflater mInflater;
-    private ArrayList<ColorList> mDataSource;
+    public ArrayList<ColorList> mDataSource;
 
     public ColorAdapter(Context context, ArrayList<ColorList> items) {
         mContext = context;
@@ -41,19 +45,62 @@ public class ColorAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View rowView = mInflater.inflate(R.layout.color_list_item, parent, false);
 
-        TextView colorSquare = (TextView) rowView.findViewById(R.id.color_square);
+        final TextView colorSquare = (TextView) rowView.findViewById(R.id.color_square);
         SeekBar colorAdjust = (SeekBar) rowView.findViewById(R.id.color_adjust);
 
         ColorList colorlist = mDataSource.get(position);
-        int alpha = colorlist.getAlpha();
-        int red = colorlist.getRed();
-        int green = colorlist.getGreen();
-        int blue = colorlist.getBlue();
+        final int alpha = colorlist.getAlpha();
+        final int red = colorlist.getRed();
+        final int green = colorlist.getGreen();
+        final int blue = colorlist.getBlue();
         colorSquare.setBackgroundColor(Color.argb(alpha,red, green, blue));
-        colorAdjust.setProgress(255);
+        colorAdjust.setProgress(colorlist.getAlpha());
+
+        colorAdjust.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mDataSource.get(position).setAlpha(progress);
+                colorSquare.setBackgroundColor(Color.argb(mDataSource.get(position).getAlpha(),red, green, blue));
+
+                int r = 0;
+                int g = 0;
+                int b = 0;
+                int size = mDataSource.size();
+
+                for (ColorList c: mDataSource){
+                    r += c.getRed() * c.getAlpha();
+                    g += c.getGreen() * c.getAlpha();
+                    b += c.getBlue() * c.getAlpha();
+                }
+                if(size != 0) {
+                    r = r / 255;
+                    g = g / 255;
+                    b = b / 255;
+                }
+                if (r > 255) r = 255;
+                if (g > 255) g = 255;
+                if (b > 255) b = 255;
+
+
+                Button colorDisplay = (Button) ((Activity)mContext).findViewById(R.id.color_display);
+                colorDisplay.setBackgroundColor(Color.argb(255, r, g, b));
+
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         return rowView;
     }
