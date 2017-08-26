@@ -50,6 +50,7 @@ public class ColorAdapter extends BaseAdapter{
 
         final TextView colorSquare = (TextView) rowView.findViewById(R.id.color_square);
         SeekBar colorAdjust = (SeekBar) rowView.findViewById(R.id.color_adjust);
+        final TextView alphaPercent = (TextView) rowView.findViewById(R.id.alpha_percent);
 
         ColorList colorlist = mDataSource.get(position);
         final int alpha = colorlist.getAlpha();
@@ -63,7 +64,19 @@ public class ColorAdapter extends BaseAdapter{
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mDataSource.get(position).setAlpha(progress);
-                colorSquare.setBackgroundColor(Color.argb(mDataSource.get(position).getAlpha(),red, green, blue));
+                int percent = mDataSource.get(position).getAlpha();
+                int r_p = red * percent;
+                int g_p = green * percent;
+                int b_p = blue * percent;
+
+                r_p = r_p / 255;
+                g_p = g_p / 255;
+                b_p = b_p / 255;
+
+                colorSquare.setBackgroundColor(Color.argb( 255,r_p, g_p, b_p));
+                int a_per = (int) (progress/2.55);
+                String a_percent = Integer.toString(a_per) + "%";
+                alphaPercent.setText(a_percent);
 
                 int r = 0;
                 int g = 0;

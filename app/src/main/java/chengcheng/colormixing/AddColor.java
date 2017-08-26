@@ -13,6 +13,7 @@ public class AddColor extends AppCompatActivity {
 
     Button button, display;
     SeekBar sb_red, sb_green, sb_blue;
+    TextView red_c, green_c, blue_c;
 
 
 
@@ -32,6 +33,9 @@ public class AddColor extends AppCompatActivity {
         sb_red = (SeekBar) findViewById(R.id.sb_red);
         sb_green = (SeekBar) findViewById(R.id.sb_green);
         sb_blue = (SeekBar) findViewById(R.id.sb_blue);
+        red_c = (TextView) findViewById(R.id.red_count);
+        green_c = (TextView) findViewById(R.id.green_count);
+        blue_c = (TextView) findViewById(R.id.blue_count);
 
         sb_red.setMax(red);
         sb_red.setProgress(red);
@@ -48,7 +52,8 @@ public class AddColor extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 red = progress;
-
+                String text = Integer.toString(progress);
+                red_c.setText(text);
                 display.setBackgroundColor(Color.argb(255, red, green, blue));
 
             }
@@ -68,7 +73,8 @@ public class AddColor extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 green = progress;
-
+                String text = Integer.toString(progress);
+                green_c.setText(text);
                 display.setBackgroundColor(Color.argb(255, red, green, blue));
             }
 
@@ -87,7 +93,8 @@ public class AddColor extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 blue = progress;
-
+                String text = Integer.toString(progress);
+                blue_c.setText(text);
                 display.setBackgroundColor(Color.argb(255, red, green, blue));
             }
 
