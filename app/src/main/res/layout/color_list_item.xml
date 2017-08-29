@@ -12,7 +12,7 @@
         />
 
     <SeekBar
-        android:layout_width="290dp"
+        android:layout_width="280dp"
         android:layout_height="30dp"
         android:id="@+id/color_adjust"
         android:max="255"
@@ -22,4 +22,10 @@
         android:layout_height="30dp"
         android:text="100%"
         android:id="@+id/alpha_percent"/>
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@mipmap/delete"
+        android:id="@+id/delete"/>
+
 </LinearLayout>

@@ -46,11 +46,22 @@ public class ColorAdapter extends BaseAdapter{
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        View rowView = mInflater.inflate(R.layout.color_list_item, parent, false);
+        final View rowView = mInflater.inflate(R.layout.color_list_item, parent, false);
+
+
 
         final TextView colorSquare = (TextView) rowView.findViewById(R.id.color_square);
         SeekBar colorAdjust = (SeekBar) rowView.findViewById(R.id.color_adjust);
         final TextView alphaPercent = (TextView) rowView.findViewById(R.id.alpha_percent);
+        Button delete = (Button) rowView.findViewById(R.id.delete);
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDataSource.remove(position);
+                notifyDataSetChanged();
+            }
+        });
 
         ColorList colorlist = mDataSource.get(position);
         final int alpha = colorlist.getAlpha();
@@ -97,11 +108,8 @@ public class ColorAdapter extends BaseAdapter{
                 if (g > 255) g = 255;
                 if (b > 255) b = 255;
 
-
                 Button colorDisplay = (Button) ((Activity)mContext).findViewById(R.id.color_display);
                 colorDisplay.setBackgroundColor(Color.argb(255, r, g, b));
-
-
             }
 
             @Override

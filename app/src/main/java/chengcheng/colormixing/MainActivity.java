@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button colorDisplay;
     private Button addColor;
+    private Button clearAll;
     private ListView colorList;
     private ColorAdapter adapter;
     final ArrayList<ColorList> colorLists = new ArrayList<ColorList>();
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         colorDisplay = (Button) findViewById(R.id.color_display);
         addColor = (Button) findViewById(R.id.add_color);
+        clearAll = (Button) findViewById(R.id.clear_all);
         colorList = (ListView) findViewById(R.id.color_list);
 
         adapter = new ColorAdapter(this, colorLists);
@@ -45,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddColor.class);
                 startActivityForResult(intent, RequestCode.ADD_COLOR);
+            }
+        });
+
+        clearAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                colorLists.clear();
+                adapter.notifyDataSetChanged();
             }
         });
 
