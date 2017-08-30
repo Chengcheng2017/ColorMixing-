@@ -15,7 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddColor"></activity>
+        <activity android:name=".AddColor" />
+        <activity android:name=".PaintingColorMixingActivity" />
+        <activity android:name=".AddPaintingColor"></activity>
     </application>
 
 </manifest>

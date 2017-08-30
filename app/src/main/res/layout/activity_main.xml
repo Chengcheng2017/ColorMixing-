@@ -26,7 +26,7 @@
         android:paddingTop="10dp"
         >
     <Button
-        android:text="Add Color"
+        android:text="Add Light"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent"

@@ -11,22 +11,16 @@ import android.widget.TextView;
 
 public class AddColor extends AppCompatActivity {
 
-    Button button, display;
-    SeekBar sb_red, sb_green, sb_blue;
-    TextView red_c, green_c, blue_c;
+    private Button button, display;
+    private SeekBar sb_red, sb_green, sb_blue;
+    private TextView red_c, green_c, blue_c;
 
-
-
-    int red, green, blue;
+    private int red, green, blue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_color);
-
-        red = 255;
-        green = 255;
-        blue = 255;
 
         button = (Button) findViewById(R.id.add_button);
         display = (Button) findViewById(R.id.color_dis);
@@ -37,16 +31,7 @@ public class AddColor extends AppCompatActivity {
         green_c = (TextView) findViewById(R.id.green_count);
         blue_c = (TextView) findViewById(R.id.blue_count);
 
-        sb_red.setMax(red);
-        sb_red.setProgress(red);
-
-        sb_green.setMax(green);
-        sb_green.setProgress(green);
-
-        sb_blue.setMax(blue);
-        sb_blue.setProgress(blue);
-
-        display.setBackgroundColor(Color.argb(255, red, green, blue));
+        display.setBackgroundColor(Color.argb(255, 0, 0, 0));
 
         sb_red.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

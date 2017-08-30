@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_painting_color_mixing"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="chengcheng.colormixing.PaintingColorMixingActivity">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:id="@+id/painting_color_display"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        >
+        <Button
+            android:text="Add Color"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:textAllCaps="false"
+            android:id="@+id/add_painting_color"
+            android:background="@color/bottom_background"
+            android:textSize="15dp"/>
+        <Button
+            android:text="Clear All"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:textAllCaps="false"
+            android:id="@+id/clear_all_2"
+            android:background="@android:color/darker_gray"
+            android:textSize="15dp"/>
+
+    </LinearLayout>
+    <android.support.v7.widget.ListViewCompat
+        android:id="@+id/painting_color_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:paddingTop="10dp">
+    </android.support.v7.widget.ListViewCompat>
+
+</LinearLayout>

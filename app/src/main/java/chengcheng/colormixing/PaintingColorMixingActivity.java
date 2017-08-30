@@ -1,55 +1,43 @@
 package chengcheng.colormixing;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class PaintingColorMixingActivity extends AppCompatActivity {
 
     private Button colorDisplay;
     private Button addColor;
     private Button clearAll;
     private ListView colorList;
-    private ColorAdapter adapter;
+    private PaintingColorAdapter adapter;
     final ArrayList<ColorList> colorLists = new ArrayList<ColorList>();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_painting_color_mixing);
+        colorDisplay = (Button) findViewById(R.id.painting_color_display);
+        addColor = (Button) findViewById(R.id.add_painting_color);
+        clearAll = (Button) findViewById(R.id.clear_all_2);
+        colorList = (ListView) findViewById(R.id.painting_color_list);
 
-        colorDisplay = (Button) findViewById(R.id.color_display);
-        addColor = (Button) findViewById(R.id.add_color);
-        clearAll = (Button) findViewById(R.id.clear_all);
-        colorList = (ListView) findViewById(R.id.color_list);
+        colorDisplay.setBackgroundColor(Color.argb(255, 255, 255, 255));
 
-        colorDisplay.setBackgroundColor(Color.argb(255, 0, 0, 0));
-
-
-
-        adapter = new ColorAdapter(this, colorLists);
+        adapter = new PaintingColorAdapter(this, colorLists);
         colorList.setAdapter(adapter);
 
 
         addColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddColor.class);
+                Intent intent = new Intent(PaintingColorMixingActivity.this, AddPaintingColor.class);
                 startActivityForResult(intent, RequestCode.ADD_COLOR);
             }
         });
@@ -67,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RequestCode.ADD_COLOR && resultCode == RESULT_OK) {
-            ColorList color = (ColorList) data.getSerializableExtra("COLOR");
+            ColorList color = (ColorList) data.getSerializableExtra("PAINTINGCOLOR");
             colorLists.add(color);
             adapter.notifyDataSetChanged();
 
@@ -76,23 +64,24 @@ public class MainActivity extends AppCompatActivity {
             int b = 0;
             int size = adapter.getCount();
 
-            for (ColorList c: adapter.mDataSource){
+            for (ColorList c: adapter.mDataSource2){
                 r += c.getRed() * c.getAlpha();
                 g += c.getGreen() * c.getAlpha();
                 b += c.getBlue() * c.getAlpha();
             }
             if(size != 0) {
-                r = r / 255;
-                g = g / 255;
-                b = b / 255;
+                r = size*255 - r / 255;
+                g = size*255 - g / 255;
+                b = size*255 - b / 255;
             }
+            if (r < 0) r = 0;
+            if (g < 0) g = 0;
+            if (b < 0) b = 0;
 
-            if (r > 255) r = 255;
-            if (g > 255) g = 255;
-            if (b > 255) b = 255;
-
-            colorDisplay.setBackgroundColor(Color.argb(255, r, g, b));
+            colorDisplay.setBackgroundColor(Color.argb(255, 255 - r, 255 - g, 255 - b));
 
         }
     }
+
 }
+
