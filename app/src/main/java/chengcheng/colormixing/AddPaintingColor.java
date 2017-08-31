@@ -31,16 +31,18 @@ public class AddPaintingColor extends AppCompatActivity {
         magenta_c = (TextView) findViewById(R.id.magenta_count);
         yellow_c = (TextView) findViewById(R.id.yellow_count);
 
-        display.setBackgroundColor(Color.argb(255, 255, 255, 255));
+        display.setBackgroundColor(Color.argb(255, 255, 255, 255)); //set initial background
+
+        /** record the data of red seek bar and change the color of display area **/
 
         sb_cyan.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 cyan = progress;
-                int a = (int) (progress/2.55);
+                int a = (int) (progress / 2.55);
                 String text = Integer.toString(a);
                 cyan_c.setText(text);
-                display.setBackgroundColor(Color.argb(255, 255-cyan, 255-magenta, 255-yellow));
+                display.setBackgroundColor(Color.argb(255, 255 - cyan, 255 - magenta, 255 - yellow));
 
             }
 
@@ -55,14 +57,15 @@ public class AddPaintingColor extends AppCompatActivity {
             }
         });
 
+        /** record the data of green seek bar and change the color of display area **/
         sb_magenta.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 magenta = progress;
-                int a = (int) (progress/2.55);
+                int a = (int) (progress / 2.55);
                 String text = Integer.toString(a);
                 magenta_c.setText(text);
-                display.setBackgroundColor(Color.argb(255, 255-cyan, 255-magenta, 255-yellow));
+                display.setBackgroundColor(Color.argb(255, 255 - cyan, 255 - magenta, 255 - yellow));
             }
 
             @Override
@@ -76,14 +79,15 @@ public class AddPaintingColor extends AppCompatActivity {
             }
         });
 
+        /** record the data of blue seek bar and change the color of display area **/
         sb_yellow.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 yellow = progress;
-                int a =  (int)(progress/2.55);
+                int a = (int) (progress / 2.55);
                 String text = Integer.toString(a);
                 yellow_c.setText(text);
-                display.setBackgroundColor(Color.argb(255,255-cyan, 255-magenta, 255-yellow));
+                display.setBackgroundColor(Color.argb(255, 255 - cyan, 255 - magenta, 255 - yellow));
             }
 
             @Override
@@ -97,12 +101,13 @@ public class AddPaintingColor extends AppCompatActivity {
             }
         });
 
+        /** back to previous page with data **/
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ColorList color = new ColorList(255, 255-cyan, 255-magenta, 255-yellow);
+                ColorList color = new ColorList(255, 255 - cyan, 255 - magenta, 255 - yellow);
                 Intent data = new Intent();
-                data.putExtra("PAINTINGCOLOR",color);
+                data.putExtra("PAINTINGCOLOR", color);
                 setResult(RESULT_OK, data);
                 finish();
             }

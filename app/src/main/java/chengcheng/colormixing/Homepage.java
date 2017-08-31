@@ -19,6 +19,7 @@ public class Homepage extends AppCompatActivity {
         lightMixing = (Button) findViewById(R.id.light_mixing_button);
         colorMixing = (Button) findViewById(R.id.color_mixing_button);
 
+        /** go to light mixing page **/
         lightMixing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -27,6 +28,7 @@ public class Homepage extends AppCompatActivity {
             }
         });
 
+        /** go to color mixing page **/
         colorMixing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

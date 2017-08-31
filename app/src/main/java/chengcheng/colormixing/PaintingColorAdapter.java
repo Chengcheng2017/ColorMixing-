@@ -29,6 +29,7 @@ public class PaintingColorAdapter extends BaseAdapter {
         mDataSource2 = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+
     @Override
     public int getCount() {
         return mDataSource2.size();
@@ -52,6 +53,7 @@ public class PaintingColorAdapter extends BaseAdapter {
         final TextView alphaPercent = (TextView) rowView.findViewById(R.id.alpha_percent);
         Button delete = (Button) rowView.findViewById(R.id.delete);
 
+        /** delete current item and update the data **/
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +68,8 @@ public class PaintingColorAdapter extends BaseAdapter {
         final int red = colorlist.getRed();
         final int green = colorlist.getGreen();
         final int blue = colorlist.getBlue();
-        colorSquare.setBackgroundColor(Color.argb(alpha,red, green, blue));
+
+        colorSquare.setBackgroundColor(Color.argb(alpha, red, green, blue)); //update background color of colorSquare
         colorAdjust.setProgress(colorlist.getAlpha());
 
         colorAdjust.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -74,6 +77,8 @@ public class PaintingColorAdapter extends BaseAdapter {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mDataSource2.get(position).setAlpha(progress);
                 int percent = mDataSource2.get(position).getAlpha();
+
+                /** update rgb **/
                 int r_p = red * percent;
                 int g_p = green * percent;
                 int b_p = blue * percent;
@@ -82,8 +87,10 @@ public class PaintingColorAdapter extends BaseAdapter {
                 g_p = g_p / 255 + 255 - percent;
                 b_p = b_p / 255 + 255 - percent;
 
-                colorSquare.setBackgroundColor(Color.argb( 255, r_p, g_p, b_p));
-                int a_per = (int) (progress/2.55);
+                colorSquare.setBackgroundColor(Color.argb(255, r_p, g_p, b_p));
+
+                /** display percent **/
+                int a_per = (int) (progress / 2.55);
                 String a_percent = Integer.toString(a_per) + "%";
                 alphaPercent.setText(a_percent);
 
@@ -105,18 +112,21 @@ public class PaintingColorAdapter extends BaseAdapter {
         return rowView;
     }
 
-    public void setBackgroundColor(){
+    /**
+     * calculate lights mixing (subtractive mixing)
+     **/
+    public void setBackgroundColor() {
         int r = 0;
         int g = 0;
         int b = 0;
         int size = mDataSource2.size();
 
-        for (ColorList c: mDataSource2){
-            r += ( 255 - c.getRed()) * c.getAlpha();
-            g += ( 255 - c.getGreen()) * c.getAlpha();
-            b += ( 255 - c.getBlue()) * c.getAlpha();
+        for (ColorList c : mDataSource2) {
+            r += (255 - c.getRed()) * c.getAlpha();
+            g += (255 - c.getGreen()) * c.getAlpha();
+            b += (255 - c.getBlue()) * c.getAlpha();
         }
-        if(size != 0) {
+        if (size != 0) {
             r = 255 - r / 255;
             g = 255 - g / 255;
             b = 255 - b / 255;
@@ -125,7 +135,7 @@ public class PaintingColorAdapter extends BaseAdapter {
         if (g < 0) g = 0;
         if (b < 0) b = 0;
 
-        Button colorDisplay = (Button) ((Activity)mContext).findViewById(R.id.painting_color_display);
+        Button colorDisplay = (Button) ((Activity) mContext).findViewById(R.id.painting_color_display);
         colorDisplay.setBackgroundColor(Color.argb(255, r, g, b));
     }
 }

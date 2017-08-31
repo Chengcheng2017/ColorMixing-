@@ -9,11 +9,11 @@ import java.io.Serializable;
  * Created by chengchengwang on 8/16/17.
  */
 
- public class ColorList implements Serializable{
+public class ColorList implements Serializable {
     public int alpha;
     public int red;
-    public  int green;
-    public  int blue;
+    public int green;
+    public int blue;
 
     public ColorList(int alpha, int red, int green, int blue) {
         this.alpha = alpha;

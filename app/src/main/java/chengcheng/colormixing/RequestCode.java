@@ -5,5 +5,5 @@ package chengcheng.colormixing;
  */
 
 public interface RequestCode {
-    int ADD_COLOR=1;
+    int ADD_COLOR = 1;
 }

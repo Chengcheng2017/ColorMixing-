@@ -31,7 +31,9 @@ public class AddColor extends AppCompatActivity {
         green_c = (TextView) findViewById(R.id.green_count);
         blue_c = (TextView) findViewById(R.id.blue_count);
 
-        display.setBackgroundColor(Color.argb(255, 0, 0, 0));
+        display.setBackgroundColor(Color.argb(255, 0, 0, 0)); //set initial background
+
+        /** record the data of red seek bar and change the color of display area **/
 
         sb_red.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -54,6 +56,8 @@ public class AddColor extends AppCompatActivity {
             }
         });
 
+        /** record the data of green seek bar and change the color of display area **/
+
         sb_green.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -73,6 +77,8 @@ public class AddColor extends AppCompatActivity {
 
             }
         });
+
+        /** record the data of blue seek bar and change the color of display area **/
 
         sb_blue.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -94,12 +100,13 @@ public class AddColor extends AppCompatActivity {
             }
         });
 
+        /** back to previous page with data **/
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ColorList color = new ColorList(255, red, green, blue);
                 Intent data = new Intent();
-                data.putExtra("COLOR",color);
+                data.putExtra("COLOR", color);
                 setResult(RESULT_OK, data);
                 finish();
             }

@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     android:paddingTop="10dp">
 
     <TextView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
         android:id="@+id/color_square"
-        />
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
 
     <SeekBar
+        android:id="@+id/color_adjust"
         android:layout_width="280dp"
         android:layout_height="30dp"
-        android:id="@+id/color_adjust"
-        android:max="255"
-        />
+        android:max="255" />
+
     <TextView
+        android:id="@+id/alpha_percent"
         android:layout_width="40dp"
         android:layout_height="30dp"
-        android:text="100%"
-        android:id="@+id/alpha_percent"/>
+        android:text="100%" />
+
     <Button
+        android:id="@+id/delete"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@mipmap/delete"
-        android:id="@+id/delete"/>
+        android:background="@mipmap/delete" />
 
 </LinearLayout>

@@ -32,10 +32,12 @@ public class PaintingColorMixingActivity extends AppCompatActivity {
 
         colorDisplay.setBackgroundColor(Color.argb(255, 255, 255, 255));
 
+        /** set adapter**/
         adapter = new PaintingColorAdapter(this, colorLists);
         colorList.setAdapter(adapter);
 
 
+        /** go to add light page **/
         addColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +46,7 @@ public class PaintingColorMixingActivity extends AppCompatActivity {
             }
         });
 
+        /** clear listview and update data **/
         clearAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,25 +60,29 @@ public class PaintingColorMixingActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        /** get data from add color page **/
         if (requestCode == RequestCode.ADD_COLOR && resultCode == RESULT_OK) {
             ColorList color = (ColorList) data.getSerializableExtra("PAINTINGCOLOR");
             colorLists.add(color);
             adapter.notifyDataSetChanged();
 
+
+            /** calculate lights mixing (subtractive mixing) **/
             int r = 0;
             int g = 0;
             int b = 0;
             int size = adapter.getCount();
 
-            for (ColorList c: adapter.mDataSource2){
+            for (ColorList c : adapter.mDataSource2) {
                 r += c.getRed() * c.getAlpha();
                 g += c.getGreen() * c.getAlpha();
                 b += c.getBlue() * c.getAlpha();
             }
-            if(size != 0) {
-                r = size*255 - r / 255;
-                g = size*255 - g / 255;
-                b = size*255 - b / 255;
+            if (size != 0) {
+                r = size * 255 - r / 255;
+                g = size * 255 - g / 255;
+                b = size * 255 - b / 255;
             }
             if (r < 0) r = 0;
             if (g < 0) g = 0;

@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Created by chengchengwang on 8/16/17.
  */
 
-public class ColorAdapter extends BaseAdapter{
+public class ColorAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
     public ArrayList<ColorList> mDataSource;
@@ -30,6 +30,7 @@ public class ColorAdapter extends BaseAdapter{
         mDataSource = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+
     @Override
     public int getCount() {
         return mDataSource.size();
@@ -53,6 +54,7 @@ public class ColorAdapter extends BaseAdapter{
         final TextView alphaPercent = (TextView) rowView.findViewById(R.id.alpha_percent);
         final Button delete = (Button) rowView.findViewById(R.id.delete);
 
+        /** delete current item and update the data **/
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +69,8 @@ public class ColorAdapter extends BaseAdapter{
         final int red = colorlist.getRed();
         final int green = colorlist.getGreen();
         final int blue = colorlist.getBlue();
+
+        /** regard alpha / 255 as the percent, update rgb **/
         int r_alpha = red * alpha;
         int g_alpha = green * alpha;
         int b_alpha = blue * alpha;
@@ -74,7 +78,8 @@ public class ColorAdapter extends BaseAdapter{
         r_alpha = r_alpha / 255;
         g_alpha = g_alpha / 255;
         b_alpha = b_alpha / 255;
-        colorSquare.setBackgroundColor(Color.argb( 255, r_alpha, g_alpha, b_alpha));
+
+        colorSquare.setBackgroundColor(Color.argb(255, r_alpha, g_alpha, b_alpha)); //update background color of colorSquare
         colorAdjust.setProgress(colorlist.getAlpha());
 
         colorAdjust.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -82,6 +87,8 @@ public class ColorAdapter extends BaseAdapter{
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mDataSource.get(position).setAlpha(progress);
                 int percent = mDataSource.get(position).getAlpha();
+
+                /** regard alpha / 255 as the percent, update rgb **/
                 int r_p = red * percent;
                 int g_p = green * percent;
                 int b_p = blue * percent;
@@ -90,8 +97,9 @@ public class ColorAdapter extends BaseAdapter{
                 g_p = g_p / 255;
                 b_p = b_p / 255;
 
-                colorSquare.setBackgroundColor(Color.argb( 255,r_p, g_p, b_p));
-                int a_per = (int) (progress/2.55);
+                colorSquare.setBackgroundColor(Color.argb(255, r_p, g_p, b_p));
+                /** display percent **/
+                int a_per = (int) (progress / 2.55);
                 String a_percent = Integer.toString(a_per) + "%";
                 alphaPercent.setText(a_percent);
 
@@ -110,22 +118,24 @@ public class ColorAdapter extends BaseAdapter{
         });
 
 
-
         return rowView;
     }
 
-    public void setBackground(){
+    /**
+     * calculate lights mixing (addictive mixing)
+     **/
+    public void setBackground() {
         int r = 0;
         int g = 0;
         int b = 0;
         int size = mDataSource.size();
 
-        for (ColorList c: mDataSource){
+        for (ColorList c : mDataSource) {
             r += c.getRed() * c.getAlpha();
             g += c.getGreen() * c.getAlpha();
             b += c.getBlue() * c.getAlpha();
         }
-        if(size != 0) {
+        if (size != 0) {
             r = r / 255;
             g = g / 255;
             b = b / 255;
@@ -134,7 +144,7 @@ public class ColorAdapter extends BaseAdapter{
         if (g > 255) g = 255;
         if (b > 255) b = 255;
 
-        Button colorDisplay = (Button) ((Activity)mContext).findViewById(R.id.color_display);
+        Button colorDisplay = (Button) ((Activity) mContext).findViewById(R.id.color_display);
         colorDisplay.setBackgroundColor(Color.argb(255, r, g, b));
     }
 

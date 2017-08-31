@@ -4,42 +4,41 @@
     android:id="@+id/activity_add_painting_color"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
     tools:context="chengcheng.colormixing.AddPaintingColor">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="30dp"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:text="CYAN"
-            android:textSize="13dp"/>
+            android:textSize="13dp" />
 
         <SeekBar
+            android:id="@+id/sb_cyan"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:id="@+id/sb_cyan"
             android:layout_marginBottom="15dp"
-            android:progress="0"
-            android:max="255"/>
+            android:max="255"
+            android:progress="0" />
 
         <TextView
+            android:id="@+id/cyan_count"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:id="@+id/cyan_count"
-            android:text="0"/>
+            android:text="0"
+            android:textSize="17dp" />
     </LinearLayout>
-
 
 
     <LinearLayout
@@ -52,21 +51,22 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:text="MAGENTA"
-            android:textSize="12dp"/>
+            android:textSize="12dp" />
 
         <SeekBar
+            android:id="@+id/sb_magenta"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:id="@+id/sb_magenta"
             android:layout_marginBottom="15dp"
-            android:progress="0"
-            android:max="255"/>
+            android:max="255"
+            android:progress="0" />
+
         <TextView
+            android:id="@+id/magenta_count"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:id="@+id/magenta_count"
-            android:text="0"/>
+            android:text="0"
+            android:textSize="17dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -79,40 +79,40 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:text="YELLOW"
-            android:textSize="13dp"/>
+            android:textSize="13dp" />
 
         <SeekBar
+            android:id="@+id/sb_yellow"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:id="@+id/sb_yellow"
             android:layout_marginBottom="15dp"
-            android:progress="0"
-            android:max="255"/>
+            android:max="255"
+            android:progress="0" />
+
         <TextView
+            android:id="@+id/yellow_count"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:id="@+id/yellow_count"
-            android:text="0" />
+            android:text="0"
+            android:textSize="17dp" />
     </LinearLayout>
 
 
     <Button
+        android:id="@+id/painting_color_dis"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:id="@+id/painting_color_dis"
+        android:layout_marginBottom="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="50dp"
-        />
+        android:layout_weight="2" />
 
     <Button
-        android:text="Add"
-        android:layout_gravity="center_horizontal"
+        android:id="@+id/add_button_p"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/add_button_p" />
+        android:layout_gravity="center_horizontal"
+        android:text="Add" />
 
 </LinearLayout>
