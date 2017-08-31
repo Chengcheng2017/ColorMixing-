@@ -3,6 +3,7 @@ package chengcheng.colormixing;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,13 +51,14 @@ public class ColorAdapter extends BaseAdapter{
         final TextView colorSquare = (TextView) rowView.findViewById(R.id.color_square);
         SeekBar colorAdjust = (SeekBar) rowView.findViewById(R.id.color_adjust);
         final TextView alphaPercent = (TextView) rowView.findViewById(R.id.alpha_percent);
-        Button delete = (Button) rowView.findViewById(R.id.delete);
+        final Button delete = (Button) rowView.findViewById(R.id.delete);
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDataSource.remove(position);
                 notifyDataSetChanged();
+                setBackground();
             }
         });
 
@@ -65,7 +67,14 @@ public class ColorAdapter extends BaseAdapter{
         final int red = colorlist.getRed();
         final int green = colorlist.getGreen();
         final int blue = colorlist.getBlue();
-        colorSquare.setBackgroundColor(Color.argb(alpha,red, green, blue));
+        int r_alpha = red * alpha;
+        int g_alpha = green * alpha;
+        int b_alpha = blue * alpha;
+
+        r_alpha = r_alpha / 255;
+        g_alpha = g_alpha / 255;
+        b_alpha = b_alpha / 255;
+        colorSquare.setBackgroundColor(Color.argb( 255, r_alpha, g_alpha, b_alpha));
         colorAdjust.setProgress(colorlist.getAlpha());
 
         colorAdjust.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -86,27 +95,7 @@ public class ColorAdapter extends BaseAdapter{
                 String a_percent = Integer.toString(a_per) + "%";
                 alphaPercent.setText(a_percent);
 
-                int r = 0;
-                int g = 0;
-                int b = 0;
-                int size = mDataSource.size();
-
-                for (ColorList c: mDataSource){
-                    r += c.getRed() * c.getAlpha();
-                    g += c.getGreen() * c.getAlpha();
-                    b += c.getBlue() * c.getAlpha();
-                }
-                if(size != 0) {
-                    r = r / 255;
-                    g = g / 255;
-                    b = b / 255;
-                }
-                if (r > 255) r = 255;
-                if (g > 255) g = 255;
-                if (b > 255) b = 255;
-
-                Button colorDisplay = (Button) ((Activity)mContext).findViewById(R.id.color_display);
-                colorDisplay.setBackgroundColor(Color.argb(255, r, g, b));
+                setBackground();
             }
 
             @Override
@@ -120,6 +109,33 @@ public class ColorAdapter extends BaseAdapter{
             }
         });
 
+
+
         return rowView;
     }
+
+    public void setBackground(){
+        int r = 0;
+        int g = 0;
+        int b = 0;
+        int size = mDataSource.size();
+
+        for (ColorList c: mDataSource){
+            r += c.getRed() * c.getAlpha();
+            g += c.getGreen() * c.getAlpha();
+            b += c.getBlue() * c.getAlpha();
+        }
+        if(size != 0) {
+            r = r / 255;
+            g = g / 255;
+            b = b / 255;
+        }
+        if (r > 255) r = 255;
+        if (g > 255) g = 255;
+        if (b > 255) b = 255;
+
+        Button colorDisplay = (Button) ((Activity)mContext).findViewById(R.id.color_display);
+        colorDisplay.setBackgroundColor(Color.argb(255, r, g, b));
+    }
+
 }

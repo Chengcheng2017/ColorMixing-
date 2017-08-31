@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -47,6 +49,7 @@ public class PaintingColorMixingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 colorLists.clear();
                 adapter.notifyDataSetChanged();
+                colorDisplay.setBackgroundColor(Color.argb(255, 255, 255, 255));
             }
         });
 

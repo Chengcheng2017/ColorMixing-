@@ -57,14 +57,16 @@ public class PaintingColorAdapter extends BaseAdapter {
             public void onClick(View v) {
                 mDataSource2.remove(position);
                 notifyDataSetChanged();
+                setBackgroundColor();
             }
         });
 
         ColorList colorlist = mDataSource2.get(position);
+        final int alpha = colorlist.getAlpha();
         final int red = colorlist.getRed();
         final int green = colorlist.getGreen();
         final int blue = colorlist.getBlue();
-        colorSquare.setBackgroundColor(Color.argb(255,red, green, blue));
+        colorSquare.setBackgroundColor(Color.argb(alpha,red, green, blue));
         colorAdjust.setProgress(colorlist.getAlpha());
 
         colorAdjust.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -85,31 +87,8 @@ public class PaintingColorAdapter extends BaseAdapter {
                 String a_percent = Integer.toString(a_per) + "%";
                 alphaPercent.setText(a_percent);
 
-                int r = 0;
-                int g = 0;
-                int b = 0;
-                int size = mDataSource2.size();
+                setBackgroundColor();
 
-                for (ColorList c: mDataSource2){
-                    r += ( 255 - c.getRed()) * c.getAlpha();
-                    g += ( 255 - c.getGreen()) * c.getAlpha();
-                    b += ( 255 - c.getBlue()) * c.getAlpha();
-                }
-                if(size != 0) {
-                    r = 255 - r / 255;
-                    g = 255 - g / 255;
-                    b = 255 - b / 255;
-                }
-                if (r < 0) r = 0;
-                if (g < 0) g = 0;
-                if (b < 0) b = 0;
-
-                Button colorDisplay = (Button) ((Activity)mContext).findViewById(R.id.painting_color_display);
-                colorDisplay.setBackgroundColor(Color.argb(255, r, g, b));
-
-                Log.v("cc", Integer.toString(r));
-                Log.v("cc1", Integer.toString(g));
-                Log.v("cc2", Integer.toString(b));
             }
 
             @Override
@@ -124,5 +103,29 @@ public class PaintingColorAdapter extends BaseAdapter {
         });
 
         return rowView;
+    }
+
+    public void setBackgroundColor(){
+        int r = 0;
+        int g = 0;
+        int b = 0;
+        int size = mDataSource2.size();
+
+        for (ColorList c: mDataSource2){
+            r += ( 255 - c.getRed()) * c.getAlpha();
+            g += ( 255 - c.getGreen()) * c.getAlpha();
+            b += ( 255 - c.getBlue()) * c.getAlpha();
+        }
+        if(size != 0) {
+            r = 255 - r / 255;
+            g = 255 - g / 255;
+            b = 255 - b / 255;
+        }
+        if (r < 0) r = 0;
+        if (g < 0) g = 0;
+        if (b < 0) b = 0;
+
+        Button colorDisplay = (Button) ((Activity)mContext).findViewById(R.id.painting_color_display);
+        colorDisplay.setBackgroundColor(Color.argb(255, r, g, b));
     }
 }
