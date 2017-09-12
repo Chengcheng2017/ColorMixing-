@@ -81,6 +81,9 @@ public class ColorAdapter extends BaseAdapter {
 
         colorSquare.setBackgroundColor(Color.argb(255, r_alpha, g_alpha, b_alpha)); //update background color of colorSquare
         colorAdjust.setProgress(colorlist.getAlpha());
+        int a_per = (int) (alpha / 2.55);
+        String a_percent = Integer.toString(a_per) + "%";
+        alphaPercent.setText(a_percent);
 
         colorAdjust.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

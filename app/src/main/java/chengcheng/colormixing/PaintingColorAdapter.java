@@ -68,6 +68,9 @@ public class PaintingColorAdapter extends BaseAdapter {
         final int red = colorlist.getRed();
         final int green = colorlist.getGreen();
         final int blue = colorlist.getBlue();
+        int a_per = (int) (alpha / 2.55);
+        String a_percent = Integer.toString(a_per) + "%";
+        alphaPercent.setText(a_percent);
 
         colorSquare.setBackgroundColor(Color.argb(alpha, red, green, blue)); //update background color of colorSquare
         colorAdjust.setProgress(colorlist.getAlpha());

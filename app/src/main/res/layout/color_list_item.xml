@@ -20,7 +20,7 @@
         android:id="@+id/alpha_percent"
         android:layout_width="40dp"
         android:layout_height="30dp"
-        android:text="100%" />
+        android:text="" />
 
     <Button
         android:id="@+id/delete"
